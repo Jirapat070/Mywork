@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 
 import Link from "next/link";
 import Image from "next/image";
+import ThemeToggle from "./component/Theme_toggle";
 
 
 
@@ -21,16 +22,19 @@ export const metadata: Metadata = {
 
 const nav = [
 
-  { href: "/", label: "Home" },
+  { href: '/', label: 'Home' },
 
-  { href: "/about", label: "About" },
+  { href: '/about', label: 'About' },
 
-  { href: "/course", label: "Course" },
 
-  { href: "/project", label: "Project" },
+  { href: '/course', label: 'Course' },
+  
 
-  { href: "/contact", label: "Contact" },
+  { href: '/project', label: 'Project' },
 
+  { href: '/blog', label: 'Blog' },
+  
+  { href: '/contact', label: 'Contact' },
 ];
 
 
@@ -78,6 +82,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </Link>
 
             ))}
+
+            <ThemeToggle />
 
           </nav>
 
