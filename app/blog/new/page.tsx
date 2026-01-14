@@ -1,25 +1,17 @@
-"use client";
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { createPost } from '../actions';
+import Link from 'next/link';
+
 export default function NewPostPage() {
-const [title, setTitle] = useState("");
-const [content, setContent] = useState("");
-const router = useRouter();
-async function submit() {
-const slug = title.toLowerCase().trim().replaceAll(" ", "-");
-await fetch("/api/posts", { method: "POST", body: JSON.stringify({
-slug, title, content, date: new Date().toISOString().slice(0,10)
-})});
-router.push("/blog");
-}
-return (
-<section className="container">
-<div className="card">
-<h1>New Post</h1>
-<input placeholder="Title" value={title} onChange={(e)=>setTitle(e.target.value)} />
-<textarea placeholder="Content" value={content} onChange={(e)=>setContent(e.target.value)} />
-<button onClick={submit}>Create</button>
-</div>
-</section>
-);
+  return (
+    <div className="container mx-auto p-8 max-w-lg">
+      <Link href="/blog" className="text-blue-500 mb-4 block">← Back to Blog</Link>
+      <h1 className="text-2xl font-bold mb-6">Create New Post</h1>
+      
+      <form action={createPost} className="flex flex-col gap-4">
+        <input name="title" placeholder="หัวข้อบทความ" className="border p-2 rounded text-black" required />
+        <textarea name="content" placeholder="เนื้อหา..." className="border p-2 rounded h-40 text-black" required />
+        <button type="submit" className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700">Save Post</button>
+      </form>
+    </div>
+  );
 }
